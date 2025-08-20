@@ -1,8 +1,8 @@
 baseURL = "https://EvanZimmerman307.github.io/portfolio/"
 languageCode = "en-us"
 title = "Evan Zimmerman"
-theme = "PaperMod"
-paginate = 10
+[pagination]
+  pagerSize = 10
 
 [params]
   author = "Evan Zimmerman"
