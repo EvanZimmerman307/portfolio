@@ -1,0 +1,10 @@
+# Hugo build
+/public/
+/resources/_gen/
+
+# OS & editor
+.DS_Store
+*.swp
+
+# Node/Go cache
+node_modules/
