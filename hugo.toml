@@ -1,5 +1,4 @@
-
-baseURL = "https://<your-username>.github.io/<your-repo>/"
+baseURL = "https://EvanZimmerman307.github.io/portfolio/"
 languageCode = "en-us"
 title = "Evan Zimmerman"
 theme = "PaperMod"
