@@ -1,0 +1,52 @@
+{{/* Optional image width (px). Defaults to 120. */}}
+{{ $w := .Get "imgWidth" }}
+{{ $paper := .Get "paper" }}
+{{ $paperDownload := .Get "paperDownload" }}
+{{ $lab := .Get "lab" }}
+{{ $labLabel := .Get "labLabel" | default "Lab" }}
+
+<div class="edu-card" style="--edu-img-w: {{ if $w }}{{$w}}{{ else }}120{{ end }}px">
+  {{ with .Get "image" }}
+    <img class="edu-card__img" src="{{ . | relURL }}" alt="{{ $.Get "title" }}">
+  {{ end }}
+  <div class="edu-card__body">
+    <h3 class="edu-card__title">{{ .Get "title" }}</h3>
+    {{ with .Get "subtitle" }}<p class="edu-card__subtitle">{{ . }}</p>{{ end }}
+
+    <div class="edu-card__content">
+      {{ .Inner | markdownify }}
+    </div>
+
+    {{/* Tag chips (unchanged) */}}
+    {{ $tags := .Get "tags" | default "" }}
+    {{ if $tags }}
+      <div class="chip-row">
+        {{ range (split $tags ",") }}
+          {{ $tag := trim . " " }}
+          {{ if $tag }}<span class="chip">{{ $tag }}</span>{{ end }}
+        {{ end }}
+      </div>
+    {{ end }}
+
+    <div class="card-actions">
+      {{ with .Get "github" }}
+        <a class="btn" href="{{ . | safeURL }}" target="_blank" rel="noopener">GitHub</a>
+      {{ end }}
+
+      {{ with $paper }}
+        {{ $paperURL := cond (or (hasPrefix . "http://") (hasPrefix . "https://")) . (. | relURL) }}
+        <a class="btn" href="{{ $paperURL }}" {{ if eq $paperDownload "true" }}download{{ end }} target="_blank" rel="noopener">Paper (PDF)</a>
+      {{ end }}
+
+      {{ with .Get "demo" }}
+        <a class="btn" href="{{ . | safeURL }}" target="_blank" rel="noopener">Demo</a>
+      {{ end }}
+
+      {{ with $lab }}
+        {{ $isExt := or (hasPrefix . "http://") (hasPrefix . "https://") }}
+        {{ $labURL := cond $isExt . (. | relURL) }}
+        <a class="btn btn--secondary" href="{{ $labURL }}" {{ if $isExt }}target="_blank" rel="noopener"{{ end }}>{{ $labLabel }}</a>
+      {{ end }}
+    </div>
+  </div>
+</div>

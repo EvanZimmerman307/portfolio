@@ -1,0 +1,26 @@
+{{/* Optional image width (px). Defaults to 120. */}}
+{{ $w := .Get "imgWidth" }}
+<div class="edu-card" style="--edu-img-w: {{ if $w }}{{$w}}{{ else }}120{{ end }}px">
+  {{ with .Get "image" }}
+    <img class="edu-card__img" src="{{ . | relURL }}" alt="{{ $.Get "title" }}">
+  {{ end }}
+  <div class="edu-card__body">
+    <h3 class="edu-card__title">{{ .Get "title" }}</h3>
+    {{ with .Get "subtitle" }}<p class="edu-card__subtitle">{{ . }}</p>{{ end }}
+
+    <div class="edu-card__content">
+      {{ .Inner | markdownify }}
+    </div>
+
+    {{/* --- TAG CHIPS (comma-separated) --- */}}
+    {{ $tags := .Get "tags" | default "" }}
+    {{ if $tags }}
+      <div class="chip-row">
+        {{ range (split $tags ",") }}
+          {{ $tag := trim . " " }}
+          {{ if $tag }}<span class="chip">{{ $tag }}</span>{{ end }}
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+</div>

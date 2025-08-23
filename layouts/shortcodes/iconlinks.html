@@ -1,0 +1,57 @@
+{{ $labels := eq (.Get "labels") "true" }}
+{{ $size := .Get "size" | default "22" }}
+
+{{ $resumeIcon := .Get "resumeIcon" | default "file" }}
+{{ $emailIcon := .Get "emailIcon" | default "mail" }}
+{{ $githubIcon := .Get "githubIcon" | default "github" }}
+{{ $linkedinIcon := .Get "linkedinIcon" | default "linkedin" }}
+
+{{ $resume := .Get "resume" }}
+{{ $email := .Get "email" }}
+{{ $github := .Get "github" }}
+{{ $linkedin := .Get "linkedin" }}
+
+{{/* NEW: transcript params */}}
+{{ $transcript := .Get "transcript" }}
+{{ $transcriptIcon := .Get "transcriptIcon" | default "file" }}
+{{ $transcriptLabel := .Get "transcriptLabel" | default "Transcript" }}
+
+{{ $resumeIconSvg := readFile (printf "static/icons/%s.svg" $resumeIcon) | safeHTML }}
+{{ $emailIconSvg  := readFile (printf "static/icons/%s.svg" $emailIcon)  | safeHTML }}
+{{ $githubIconSvg := readFile (printf "static/icons/%s.svg" $githubIcon) | safeHTML }}
+{{ $linkedinIconSvg := readFile (printf "static/icons/%s.svg" $linkedinIcon) | safeHTML }}
+{{/* NEW: transcript icon */}}
+{{ $transcriptIconSvg := readFile (printf "static/icons/%s.svg" $transcriptIcon) | safeHTML }}
+
+<div class="icon-links" style="--icon-size: {{ $size }}px;">
+  {{ with $resume }}
+    <a class="icon-btn" href="{{ . | relURL }}" aria-label="Resume" {{ if eq ($.Get "downloadResume") "true" }}download{{ end }}>
+      <span class="icon">{{ $resumeIconSvg }}</span>{{ if $labels }}<span class="label">Resume</span>{{ end }}
+    </a>
+  {{ end }}
+
+  {{/* NEW: transcript button (placed next to Resume) */}}
+  {{ with $transcript }}
+    <a class="icon-btn" href="{{ . | relURL }}" aria-label="{{ $transcriptLabel }}" {{ if eq ($.Get "downloadTranscript") "true" }}download{{ end }}>
+      <span class="icon">{{ $transcriptIconSvg }}</span>{{ if $labels }}<span class="label">{{ $transcriptLabel }}</span>{{ end }}
+    </a>
+  {{ end }}
+
+  {{ with $email }}
+    <a class="icon-btn" href="{{ . | safeURL }}" aria-label="Email">
+      <span class="icon">{{ $emailIconSvg }}</span>{{ if $labels }}<span class="label">Email</span>{{ end }}
+    </a>
+  {{ end }}
+
+  {{ with $github }}
+    <a class="icon-btn" href="{{ . | safeURL }}" target="_blank" rel="noopener" aria-label="GitHub">
+      <span class="icon">{{ $githubIconSvg }}</span>{{ if $labels }}<span class="label">GitHub</span>{{ end }}
+    </a>
+  {{ end }}
+
+  {{ with $linkedin }}
+    <a class="icon-btn" href="{{ . | safeURL }}" target="_blank" rel="noopener" aria-label="LinkedIn">
+      <span class="icon">{{ $linkedinIconSvg }}</span>{{ if $labels }}<span class="label">LinkedIn</span>{{ end }}
+    </a>
+  {{ end }}
+</div>

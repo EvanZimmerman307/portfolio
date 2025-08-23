@@ -16,9 +16,13 @@ title = "Evan Zimmerman"
   ShowPostNavLinks = true
   comments = false
 
-  [params.homeInfoParams]
-    Title = "Hi, I'm Evan 👋"
-    Content = "I build scalable systems and practical ML. Currently MS CSE @ UMich; previously AWS Bedrock intern on model hosting and observability.\nExplore my work, research, and projects below."
+  [params.profileMode]
+    enabled = true
+    title = "Hi, I'm Evan 👋"
+    subtitle = "I am pursuing an MSCS at the University of Michigan, and I previously interned with AWS Bedrock as an SDE on the Anthropic model hosting team. I am passionate about the intersection of ML/AI and distributed systems. I enjoy working on ambiguous problems that push me to develop new skills."
+    imageUrl = "image/Zimmerman_Evan_Headshot.jpg"
+    imageWidth = 290
+    imageHeight = 360
 
   [[params.socialIcons]]
     name = "github"
@@ -31,6 +35,14 @@ title = "Evan Zimmerman"
   [[params.socialIcons]]
     name = "email"
     url = "mailto:evanzimm@umich.edu"
+  
+  [[params.profileMode.buttons]]
+    name = "Projects"
+    url = "/portfolio/projects/"
+
+    [[params.profileMode.buttons]]
+    name = "About Me"
+    url = "/portfolio/aboutme/"
 
 [menu]
   [[menu.main]]
@@ -50,8 +62,8 @@ title = "Evan Zimmerman"
     url = "/education/"
     weight = 40
   [[menu.main]]
-    name = "Resume"
-    url = "/resume/"
+    name = "About Me"
+    url = "/aboutme/"
     weight = 50
 
 [module]
