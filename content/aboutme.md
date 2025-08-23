@@ -8,7 +8,7 @@ I grew up in the Northern Virginia suburbs of Washington, D.C. In 2024, I gradua
 
 {{< iconlinks
   resume="resume/EvanZimmerman_SWE_Resume.pdf"
-  transcript="resume/umich_Transcript.pdf"
+  transcript="resume/umich_transcript.pdf"
   downloadTranscript="false"
   email="mailto:evanzimm@umich.edu"
   github="https://github.com/EvanZimmerman307"
